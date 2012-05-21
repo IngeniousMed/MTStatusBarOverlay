@@ -156,6 +156,8 @@ typedef enum MTMessageType {
 - (void)postImmediateFinishMessage:(NSString *)message duration:(NSTimeInterval)duration animated:(BOOL)animated;
 
 // shows a error-sign instead of the activity indicator and hides the status bar after the specified duration
+- (void)postErrorMessage:(NSString *)message;
+- (void)postErrorMessage:(NSString *)message animated:(BOOL)animated;
 - (void)postErrorMessage:(NSString *)message duration:(NSTimeInterval)duration;
 - (void)postErrorMessage:(NSString *)message duration:(NSTimeInterval)duration animated:(BOOL)animated;
 // clears the message queue and shows this message instantly
