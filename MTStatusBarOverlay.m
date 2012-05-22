@@ -63,7 +63,7 @@ MAX([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication 
 ///////////////////////////////////////////////////////
 
 #define kLightThemeTextColor						[UIColor blackColor]
-#define kLightThemeErrorMessageTextColor            [UIColor redColor] // [UIColor colorWithRed:0.494898f green:0.330281f blue:0.314146f alpha:1.0f]
+#define kLightThemeErrorMessageTextColor            [UIColor colorWithRed:1 green:0.079 blue:0.127 alpha:1] // [UIColor colorWithRed:0.494898f green:0.330281f blue:0.314146f alpha:1.0f]
 #define kLightThemeFinishedMessageTextColor         [UIColor blackColor] // [UIColor colorWithRed:0.389487f green:0.484694f blue:0.38121f alpha:1.0f]
 #define kLightThemeShadowColor                      [UIColor whiteColor]
 #define kLightThemeErrorMessageShadowColor          [UIColor whiteColor]
@@ -79,7 +79,7 @@ MAX([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication 
 ///////////////////////////////////////////////////////
 
 #define kDarkThemeTextColor							[UIColor colorWithRed:0.749f green:0.749f blue:0.749f alpha:1.0f]
-#define kDarkThemeErrorMessageTextColor             [UIColor redColor] // [UIColor colorWithRed:0.918367f green:0.48385f blue:0.423895f alpha:1.0f]
+#define kDarkThemeErrorMessageTextColor             [UIColor colorWithRed:1 green:0.079 blue:0.127 alpha:1] // [UIColor colorWithRed:0.918367f green:0.48385f blue:0.423895f alpha:1.0f]
 #define kDarkThemeFinishedMessageTextColor          [UIColor colorWithRed:0.749f green:0.749f blue:0.749f alpha:1.0f] // [UIColor colorWithRed:0.681767f green:0.918367f blue:0.726814f alpha:1.0f]
 #define kDarkThemeActivityIndicatorViewStyle		UIActivityIndicatorViewStyleWhite
 #define kDarkThemeDetailViewBackgroundColor			[UIColor colorWithRed:0.3f green:0.3f blue:0.3f alpha:1.0f]
