@@ -328,7 +328,7 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 		detailTextView_.backgroundColor = [UIColor clearColor];
         detailTextView_.userInteractionEnabled = NO;
 		detailTextView_.hidden = detailViewMode_ != MTDetailViewModeDetailText;
-		[detailView_ addSubview:detailTextView_];
+		//[detailView_ addSubview:detailTextView_];
         
 		// Message History
 		messageHistory_ = [[NSMutableArray alloc] init];
@@ -708,7 +708,11 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
         [self updateProgressViewSizeForLabel:self.hiddenStatusLabel];
         
         // position hidden status label under visible status label
-        self.hiddenStatusLabel.frame = CGRectMake(self.hiddenStatusLabel.frame.origin.x,
+		NSLog(@"********** - x      is - %f", self.hiddenStatusLabel.frame.origin.x);
+		NSLog(@"********** - y      is - %f", kStatusBarHeight);
+		NSLog(@"********** - width  is - %f", self.hiddenStatusLabel.frame.size.width);
+		NSLog(@"********** - height is - %f", self.hiddenStatusLabel.frame.size.height);
+        self.hiddenStatusLabel.frame = CGRectMake(0.0,
                                                   kStatusBarHeight,
                                                   self.hiddenStatusLabel.frame.size.width,
                                                   self.hiddenStatusLabel.frame.size.height);
@@ -718,7 +722,17 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
         [UIView animateWithDuration:kNextStatusAnimationDuration
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
+						 animations:^{
+							 NSLog(@"********** statusLabel1 - x      is - %f", self.statusLabel1.frame.origin.x);
+							 NSLog(@"********** statusLabel1 - y1     is - %f", self.statusLabel1.frame.origin.y);
+							 NSLog(@"********** statusLabel1 - y2     is - %f", kStatusBarHeight);
+							 NSLog(@"********** statusLabel1 - width  is - %f", self.statusLabel1.frame.size.width);
+							 NSLog(@"********** statusLabel1- height is - %f", self.statusLabel1.frame.size.height);
+							 NSLog(@"********** statusLabel2 - x      is - %f", self.statusLabel2.frame.origin.x);
+							 NSLog(@"********** statusLabel2 - y1     is - %f", self.statusLabel2.frame.origin.y);
+							 NSLog(@"********** statusLabel2 - y2     is - %f", kStatusBarHeight);
+							 NSLog(@"********** statusLabel2 - width  is - %f", self.statusLabel2.frame.size.width);
+							 NSLog(@"********** statusLabel2 - height is - %f", self.statusLabel2.frame.size.height);
                              // move both status labels up
                              self.statusLabel1.frame = CGRectMake(self.statusLabel1.frame.origin.x,
                                                                   self.statusLabel1.frame.origin.y - kStatusBarHeight,
