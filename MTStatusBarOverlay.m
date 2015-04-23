@@ -21,6 +21,7 @@
 
 #import "MTStatusBarOverlay.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIDevice-Hardware.h"
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -328,9 +329,7 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 		detailTextView_.backgroundColor = [UIColor clearColor];
         detailTextView_.userInteractionEnabled = NO;
 		detailTextView_.hidden = detailViewMode_ != MTDetailViewModeDetailText;
-		// I commented out the code below to fix PT  92375178
-		// Got rid of the phantom gray box
-		//[detailView_ addSubview:detailTextView_];
+		[detailView_ addSubview:detailTextView_];
         
 		// Message History
 		messageHistory_ = [[NSMutableArray alloc] init];
@@ -721,12 +720,12 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAllowUserInteraction
 						 animations:^{
-                             // move both status labels up
-                             self.statusLabel1.frame = CGRectMake(self.statusLabel1.frame.origin.x,
-                                                                  self.statusLabel1.frame.origin.y - kStatusBarHeight,
-                                                                  self.statusLabel1.frame.size.width,
-                                                                  self.statusLabel1.frame.size.height);
-                             self.statusLabel2.frame = CGRectMake(self.statusLabel2.frame.origin.x,
+							 // move both status labels up
+							 self.statusLabel1.frame = CGRectMake(self.statusLabel1.frame.origin.x,
+																  self.statusLabel1.frame.origin.y - kStatusBarHeight,
+																  self.statusLabel1.frame.size.width,
+																  self.statusLabel1.frame.size.height);
+							 self.statusLabel1.frame = CGRectMake(self.statusLabel2.frame.origin.x,
                                                                   self.statusLabel2.frame.origin.y - kStatusBarHeight,
                                                                   self.statusLabel2.frame.size.width,
                                                                   self.statusLabel2.frame.size.height);
@@ -863,17 +862,31 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
     */
 	
 	CGFloat pi = (CGFloat)M_PI;
+	NSString *deviceModel = [[UIDevice currentDevice] platformString];
+	NSString *platformVersion = [[UIDevice currentDevice] systemVersion];
 	if (orientation == UIDeviceOrientationPortrait) {
 		self.transform = CGAffineTransformIdentity;
-		self.frame = CGRectMake(0.f,0.f,kScreenWidth,kStatusBarHeight);
+		if ([deviceModel isEqualToString:@"iPad 4G"] && [platformVersion isEqualToString:@"8.3"]) {
+			self.frame = CGRectMake(0.f,-256.0f,kScreenWidth,kStatusBarHeight);
+		} else {
+			self.frame = CGRectMake(0.f,0.0f,kScreenWidth,kStatusBarHeight);
+		}
 		self.smallFrame = CGRectMake(self.frame.size.width - kWidthSmall, 0.0f, kWidthSmall, self.frame.size.height);
 	}else if (orientation == UIDeviceOrientationLandscapeLeft) {
 		self.transform = CGAffineTransformMakeRotation(pi * (90.f) / 180.0f);
-		self.frame = CGRectMake(kScreenWidth - kStatusBarHeight,0, kStatusBarHeight, kScreenHeight);
+		if ([deviceModel isEqualToString:@"iPad 4G"] && [platformVersion isEqualToString:@"8.3"]) {
+			self.frame = CGRectMake(kScreenWidth - kStatusBarHeight, -256.0f, kStatusBarHeight, kScreenHeight);
+		} else {
+			self.frame = CGRectMake(kScreenWidth - kStatusBarHeight, 0.0f, kStatusBarHeight, kScreenHeight);
+		}
 		self.smallFrame = CGRectMake(kScreenHeight-kWidthSmall,0,kWidthSmall,kStatusBarHeight);
 	} else if (orientation == UIDeviceOrientationLandscapeRight) {
 		self.transform = CGAffineTransformMakeRotation(pi * (-90.f) / 180.0f);
-		self.frame = CGRectMake(0.f,0.f, kStatusBarHeight, kScreenHeight);
+		if ([deviceModel isEqualToString:@"iPad 4G"] && [platformVersion isEqualToString:@"8.3"]) {
+			self.frame = CGRectMake(0.f, -256.0f, kStatusBarHeight, kScreenHeight);
+		} else {
+			self.frame = CGRectMake(0.f, 0.0f, kStatusBarHeight, kScreenHeight);
+		}
 		self.smallFrame = CGRectMake(kScreenHeight-kWidthSmall,0.f, kWidthSmall, kStatusBarHeight);
 	} else if (orientation == UIDeviceOrientationPortraitUpsideDown) {
 		self.transform = CGAffineTransformMakeRotation(pi);
